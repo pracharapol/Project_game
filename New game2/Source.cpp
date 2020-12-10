@@ -42,7 +42,7 @@ int main() {
 
 	sf::Sprite myRock;
 	myRock.setTexture(myRockTex);
-	myRock.setPosition(200, 500);
+	myRock.setPosition(500, 0);
 	myRock.setScale(0.5, 0.5);
 
 	int spritesizeRockX = myRockTex.getSize().x / 8;
@@ -174,7 +174,10 @@ int main() {
 		if (myShip.getPosition().y >= 635) {
 			myShip.setPosition(myShip.getPosition().x, 635);
 		}
-		
+		//bound
+		if (myBullet.getGlobalBounds().intersects(myRock.getGlobalBounds())) {
+			myBullet.setPosition(-1000,-1000);
+		}
 		
 		myWindow.display();
 		myWindow.clear();
