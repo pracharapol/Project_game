@@ -62,12 +62,24 @@ int main() {
 
 	myBullet.setTextureRect(sf::IntRect(0, 0, spritesizeBulletX, spritesizeBulletY));
 	myBullet.setPosition(-1000, -2000);
+	//bomb
+	sf::Texture myBombTex;
+	myBombTex.loadFromFile("bomb.png");
 
+	sf::Sprite myBomb;
+	myBomb.setTexture(myBombTex);
+	myBomb.setScale(0.25, 0.25);
 
+	int spritesizeBombX = myBombTex.getSize().x / 1;
+	int spritesizeBombY = myBombTex.getSize().y / 1;
+
+	myBomb.setTextureRect(sf::IntRect(0, 0, spritesizeBombX, spritesizeBombY));
+	myBomb.setPosition(-1000, -2000);
 	int animationFrame = 0;
 	while (true) {
 		myWindow.draw(myBg);
 		myWindow.draw(myBullet);
+		myWindow.draw(myBomb);
 		myBg.move(0.0f, 0.2f);
 		if (myBg.getPosition().y >= -100) {
 			myBg.setPosition(myBg.getPosition().x, -1200);
@@ -159,7 +171,14 @@ int main() {
 		}
 		
 		myBullet.move(0.0f, -2.0f);
-		
+		//bomb
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::B)) {
+			if (myBomb.getPosition().y <= 0) {
+				myBomb.setPosition(myShip.getPosition().x + 18, myShip.getPosition().y);
+			}
+		}
+
+		myBomb.move(0.0f, -1.0f);
 		
 		//bound ship
 		if (myShip.getPosition().x <= 0) {
