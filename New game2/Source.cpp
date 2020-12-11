@@ -562,6 +562,7 @@ int main() {
 		if (myBullet.getGlobalBounds().intersects(myRock4.getGlobalBounds())) {
 			myBullet.setPosition(-1000, -1000);
 			score++;
+			hit++;
 			if (hit == 4) {
 					myBoom.setPosition(myRock4.getPosition().x, myRock4.getPosition().y);
 				}
@@ -576,6 +577,7 @@ int main() {
 		if (myBullet.getGlobalBounds().intersects(myRock5.getGlobalBounds())) {
 			myBullet.setPosition(-1000, -1000);
 			score++;	
+			hit++;
 			if (hit == 4) {
 						myBoom.setPosition(myRock5.getPosition().x, myRock5.getPosition().y);
 					}
@@ -603,7 +605,7 @@ int main() {
 		}
 		if (myBomb.getGlobalBounds().intersects(myRock2.getGlobalBounds())) {
 			myBomb.setPosition(-1000, -1000);
-			myRock4.setPosition(ranRockX4, ranRockY);
+			myRock2.setPosition(ranRockX2, ranRockY);
 			score += 100;
 		}
 		if (myBomb.getGlobalBounds().intersects(myRock3.getGlobalBounds())) {
@@ -644,12 +646,16 @@ int main() {
 		//bound ship rock
 		if (myShip.getGlobalBounds().intersects(myRock.getGlobalBounds())) {
 			myRock.setPosition(ranRockX, ranRockY);
+			
 			if (heart > 0) {
 				heart--;
 			}
 			else {
 				heart = heart;
 			}		
+			
+			
+		
 		}
 		if (myShip.getGlobalBounds().intersects(myRock2.getGlobalBounds())) {
 			myRock2.setPosition(ranRockX2, ranRockY);
