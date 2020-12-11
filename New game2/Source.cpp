@@ -58,13 +58,22 @@ int main() {
 	backgroundSound.setBuffer(myBuffer);
 	backgroundSound.play();
 	backgroundSound.setLoop(true);
-	backgroundSound.setVolume(2);
+	backgroundSound.setVolume(20);
 	//////sound hit
 	sf::SoundBuffer myBuffer1;
 	myBuffer1.loadFromFile("hitsound.wav");
 	sf::Sound hitsound;
 	hitsound.setBuffer(myBuffer1);
-	
+	//////sound boom
+	sf::SoundBuffer myBuffer2;
+	myBuffer2.loadFromFile("soundboom.flac");
+	sf::Sound boomsound;
+	boomsound.setBuffer(myBuffer2);
+	//////sound spell
+	sf::SoundBuffer myBuffer3;
+	myBuffer3.loadFromFile("spell.wav");
+	sf::Sound spellsound;
+	spellsound.setBuffer(myBuffer3);
 	
 	
 	//Background
@@ -571,7 +580,8 @@ int main() {
 			hit++;
 			if (hit == 4) {
 					myBoom.setPosition(myRock.getPosition().x, myRock.getPosition().y);
-				}
+					boomsound.play();
+			}
 			if (hit >= 5) {
 				myRock.setPosition(ranRockX, ranRockY);
 				
@@ -585,7 +595,8 @@ int main() {
 			score++;
 			hit++;
 			if (hit == 4) {
-					myBoom.setPosition(myRock2.getPosition().x, myRock2.getPosition().y);
+					myBoom.setPosition(myRock2.getPosition().x, myRock2.getPosition().y); 
+					boomsound.play();
 				}
 			if (hit >= 5) {
 				myRock2.setPosition(ranRockX2, ranRockY);
@@ -601,7 +612,8 @@ int main() {
 			hit++;
 			if (hit == 4) {
 					myBoom.setPosition(myRock3.getPosition().x, myRock3.getPosition().y);
-				}
+					boomsound.play();
+			}
 			if (hit >= 5) {
 				myRock3.setPosition(ranRockX3, ranRockY);
 				
@@ -616,7 +628,8 @@ int main() {
 			hit++;
 			if (hit == 4) {
 					myBoom.setPosition(myRock4.getPosition().x, myRock4.getPosition().y);
-				}
+					boomsound.play();
+			}
 			if (hit >= 5) {
 				myRock4.setPosition(ranRockX4, ranRockY);
 				
@@ -631,7 +644,8 @@ int main() {
 			hit++;
 			if (hit == 4) {
 						myBoom.setPosition(myRock5.getPosition().x, myRock5.getPosition().y);
-					}
+						boomsound.play();
+			}
 			if (hit >= 5) {  
 				
 					myRock5.setPosition(ranRockX5, ranRockY);
@@ -648,6 +662,7 @@ int main() {
 			hit++;
 			if (hit == 19) {
 				myBoom.setPosition(myRock6.getPosition().x, myRock6.getPosition().y);
+				boomsound.play();
 			}
 			if (hit >= 20) {
 
@@ -670,36 +685,43 @@ int main() {
 		if (myBomb.getGlobalBounds().intersects(myRock.getGlobalBounds())) {
 			myBomb.setPosition(-1000, -1000);
 			myRock.setPosition(ranRockX, ranRockY);
+			boomsound.play();
 			score += 100;
 		}
 		if (myBomb.getGlobalBounds().intersects(myRock2.getGlobalBounds())) {
 			myBomb.setPosition(-1000, -1000);
 			myRock2.setPosition(ranRockX2, ranRockY);
+			boomsound.play();
 			score += 100;
 		}
 		if (myBomb.getGlobalBounds().intersects(myRock3.getGlobalBounds())) {
 			myBomb.setPosition(-1000, -1000);
 			myRock3.setPosition(ranRockX3, ranRockY);
+			boomsound.play();
 			score+= 100;
 		}
 		if (myBomb.getGlobalBounds().intersects(myRock4.getGlobalBounds())) {
 			myBomb.setPosition(-1000, -1000);
 			myRock4.setPosition(ranRockX4, ranRockY);
+			boomsound.play();
 			score += 100;
 		}	
 		if (myBomb.getGlobalBounds().intersects(myRock5.getGlobalBounds())) {
 			myBomb.setPosition(-1000, -1000);
 			myRock5.setPosition(ranRockX5, ranRockY);
+			boomsound.play();
 			score += 100;
 		}
 		if (myBomb.getGlobalBounds().intersects(myRock6.getGlobalBounds())) {
 			myBomb.setPosition(-1000, -1000);
 			myRock6.setPosition(ranRockX6, -500);
+			boomsound.play();
 			score += 100;
 		}
 			//bound ship heart
 		if (myShip.getGlobalBounds().intersects(myHeart.getGlobalBounds())) {
 			myHeart.setPosition(ranHeartX, ranHeartY);
+			spellsound.play();
 			if (heart <=9) { 
 				heart++;
 			}
@@ -710,6 +732,7 @@ int main() {
 		//bound ship bomb item
 		if (myShip.getGlobalBounds().intersects(myBomb1.getGlobalBounds())) {
 			myBomb1.setPosition(ranBombX, ranBombY);
+			spellsound.play();
 			if (Bomb <= 4) {
 				Bomb++;
 			}
@@ -720,19 +743,17 @@ int main() {
 		//bound ship rock
 		if (myShip.getGlobalBounds().intersects(myRock.getGlobalBounds())) {
 			myRock.setPosition(ranRockX, ranRockY);
-			
+			boomsound.play();
 			if (heart > 0) {
 				heart--;
 			}
 			else {
 				heart = heart;
 			}		
-			
-			
-		
 		}
 		if (myShip.getGlobalBounds().intersects(myRock2.getGlobalBounds())) {
 			myRock2.setPosition(ranRockX2, ranRockY);
+			boomsound.play();
 			if (heart > 0) {
 				heart--;
 			}
@@ -742,6 +763,7 @@ int main() {
 		}
 		if (myShip.getGlobalBounds().intersects(myRock3.getGlobalBounds())) {
 			myRock3.setPosition(ranRockX3, ranRockY);
+			boomsound.play();
 			if (heart > 0) {
 				heart--;
 			}
@@ -751,6 +773,7 @@ int main() {
 		}
 		if (myShip.getGlobalBounds().intersects(myRock4.getGlobalBounds())) {
 			myRock4.setPosition(ranRockX4, ranRockY);
+			boomsound.play();
 			if (heart > 0) {
 				heart--;
 			}
@@ -760,6 +783,7 @@ int main() {
 		}
 		if (myShip.getGlobalBounds().intersects(myRock5.getGlobalBounds())) {
 			myRock5.setPosition(ranRockX5, ranRockY);
+			boomsound.play();
 			if (heart > 0) {
 				heart--;
 			}
@@ -769,6 +793,7 @@ int main() {
 		}
 		if (myShip.getGlobalBounds().intersects(myRock6.getGlobalBounds())) {
 			myRock6.setPosition(ranRockX6, -500);
+			boomsound.play();
 			if (heart > 0) {
 				heart--;
 			}
