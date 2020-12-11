@@ -8,7 +8,7 @@ int main() {
 	int level = 1;
 	int heart = 5;
 	int Bomb = 0;
-	
+	int hit = 0;
 	sf::RenderWindow myWindow(sf::VideoMode(1024, 720), "My Game");
 	//Font
 	char s[] = "Score : ";
@@ -517,22 +517,56 @@ int main() {
 		if (myBullet.getGlobalBounds().intersects(myRock.getGlobalBounds())) {
 			myBullet.setPosition(-1000, -1000);			
 			score++;
+			hit++;
+			if (hit == 5) {
+				myRock.setPosition(ranRockX, ranRockY);
+				if (hit >= 5) {
+					hit = 0;
+				}
+			}
 		}
 		if (myBullet.getGlobalBounds().intersects(myRock2.getGlobalBounds())) {
 			myBullet.setPosition(-1000, -1000);
 			score++;
+			hit++;
+			if (hit == 5) {
+				myRock2.setPosition(ranRockX2, ranRockY);
+				if (hit >= 5) {
+					hit = 0;
+				}
+			}
 		}
 		if (myBullet.getGlobalBounds().intersects(myRock3.getGlobalBounds())) {
 			myBullet.setPosition(-1000, -1000);
 			score++;
+			hit++;
+			if (hit == 5) {
+				myRock3.setPosition(ranRockX3, ranRockY);
+				if (hit >= 5) {
+					hit = 0;
+				}
+			}
 		}
 		if (myBullet.getGlobalBounds().intersects(myRock4.getGlobalBounds())) {
 			myBullet.setPosition(-1000, -1000);
 			score++;
+			if (hit == 5) {
+				myRock4.setPosition(ranRockX4, ranRockY);
+				if (hit >= 5) {
+					hit = 0;
+				}
+			}
 		}		
 		if (myBullet.getGlobalBounds().intersects(myRock5.getGlobalBounds())) {
 			myBullet.setPosition(-1000, -1000);
 			score++;
+			if (hit == 5) {
+				myRock5.setPosition(ranRockX5, ranRockY);
+				if (hit >= 5) {
+					hit = 0;
+				}
+			}
+		
 		}
 		
 		//bound Bomb myrock
@@ -589,7 +623,7 @@ int main() {
 			}
 			else {
 				heart = heart;
-			}
+			}		
 		}
 		if (myShip.getGlobalBounds().intersects(myRock2.getGlobalBounds())) {
 			myRock2.setPosition(ranRockX2, ranRockY);
