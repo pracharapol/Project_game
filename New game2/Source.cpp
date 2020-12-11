@@ -518,8 +518,12 @@ int main() {
 			myBullet.setPosition(-1000, -1000);			
 			score++;
 			hit++;
+			if (hit == 4) {
+					myBoom.setPosition(myRock.getPosition().x, myRock.getPosition().y);
+				}
 			if (hit == 5) {
 				myRock.setPosition(ranRockX, ranRockY);
+				
 				if (hit >= 5) {
 					hit = 0;
 				}
@@ -529,8 +533,12 @@ int main() {
 			myBullet.setPosition(-1000, -1000);
 			score++;
 			hit++;
+			if (hit == 4) {
+					myBoom.setPosition(myRock2.getPosition().x, myRock2.getPosition().y);
+				}
 			if (hit == 5) {
 				myRock2.setPosition(ranRockX2, ranRockY);
+				
 				if (hit >= 5) {
 					hit = 0;
 				}
@@ -540,8 +548,12 @@ int main() {
 			myBullet.setPosition(-1000, -1000);
 			score++;
 			hit++;
+			if (hit == 4) {
+					myBoom.setPosition(myRock3.getPosition().x, myRock3.getPosition().y);
+				}
 			if (hit == 5) {
 				myRock3.setPosition(ranRockX3, ranRockY);
+				
 				if (hit >= 5) {
 					hit = 0;
 				}
@@ -550,8 +562,12 @@ int main() {
 		if (myBullet.getGlobalBounds().intersects(myRock4.getGlobalBounds())) {
 			myBullet.setPosition(-1000, -1000);
 			score++;
+			if (hit == 4) {
+					myBoom.setPosition(myRock4.getPosition().x, myRock4.getPosition().y);
+				}
 			if (hit == 5) {
 				myRock4.setPosition(ranRockX4, ranRockY);
+				
 				if (hit >= 5) {
 					hit = 0;
 				}
@@ -559,16 +575,26 @@ int main() {
 		}		
 		if (myBullet.getGlobalBounds().intersects(myRock5.getGlobalBounds())) {
 			myBullet.setPosition(-1000, -1000);
-			score++;
+			score++;	
+			if (hit == 4) {
+						myBoom.setPosition(myRock5.getPosition().x, myRock5.getPosition().y);
+					}
 			if (hit == 5) {
-				myRock5.setPosition(ranRockX5, ranRockY);
+				
+					myRock5.setPosition(ranRockX5, ranRockY);
+				
 				if (hit >= 5) {
 					hit = 0;
 				}
 			}
 		
 		}
-		
+		if (hit == 0) {
+			myBoom.setPosition(-1000, -2000);
+		}
+		if (hit == 5) {
+			myBoom.setPosition(-1000, -2000);
+		}
 		//bound Bomb myrock
 		if (myBomb.getGlobalBounds().intersects(myRock.getGlobalBounds())) {
 			myBomb.setPosition(-1000, -1000);
@@ -661,10 +687,7 @@ int main() {
 				heart = heart;
 			}
 		}
-		//boom
-		if (score >= 40) {
-			myBoom.setPosition(myRock.getPosition().x, myRock.getPosition().y);
-		}
+		
 		//score
 		if (score == 200) {
 			level = 2;
