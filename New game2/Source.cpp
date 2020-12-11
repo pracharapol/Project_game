@@ -3,7 +3,15 @@
 #include<stdlib.h>
 #include<SFML/Audio.hpp>
 #include<time.h>
+
+
+
+
+
+
+
 int main() {
+	
 	int score = 0;
 	int level = 1;
 	int heart = 5;
@@ -47,10 +55,6 @@ int main() {
 	myText3.setFont(myFont3);
 	myText3.setFillColor(sf::Color::Red);
 	myText3.setCharacterSize(20);
-	
-	
-	
-	
 	//////sound background
 	sf::SoundBuffer myBuffer;
 	myBuffer.loadFromFile("sound01.wav");
@@ -817,9 +821,6 @@ int main() {
 		if (score >= 3000) {
 			level = 6;
 		}
-		
-		
-		
 		myText.setPosition(0, 0);
 		myText.setString("Score : ");
 		myWindow.draw(myText);
@@ -865,7 +866,11 @@ int main() {
 		myWindow.draw(myHeart);
 		myWindow.draw(myBomb1);
 		myWindow.draw(myBoom);
-
+		//Game over
+		if (heart == 0) {
+			break;
+			
+		}
 
 		myWindow.display();
 		myWindow.clear();
