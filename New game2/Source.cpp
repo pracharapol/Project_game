@@ -6,7 +6,7 @@
 int main() {
 	int score = 0;
 	int level = 1;
-	int heart = 3;
+	int heart = 5;
 	int Bomb = 0;
 	
 	sf::RenderWindow myWindow(sf::VideoMode(1024, 720), "My Game");
@@ -130,7 +130,21 @@ int main() {
 
 	myRock4.setTextureRect(sf::IntRect(0, 0, spritesizeRockX4, spritesizeRockY4));
 	
-	
+	//rock 5
+	sf::Texture myRockTex5;
+	myRockTex5.loadFromFile("rock.png");
+
+	sf::Sprite myRock5;
+	myRock5.setTexture(myRockTex5);
+	myRock5.setScale(0.7, 0.8);
+
+	int spritesizeRockX5 = myRockTex5.getSize().x / 8;
+	int spritesizeRockY5 = myRockTex5.getSize().y / 8;
+
+	myRock5.setTextureRect(sf::IntRect(0, 0, spritesizeRockX5, spritesizeRockY5));
+
+
+
 	//heart
 	sf::Texture myHeartTex;
 	myHeartTex.loadFromFile("heart.png");
@@ -158,13 +172,7 @@ int main() {
 
 	myBomb1.setTextureRect(sf::IntRect(0, 0, spritesizeBombX1, spritesizeBombY1));
 	myBomb1.setPosition(500, -3000);
-	
-	
-	
-	
-	
-	
-	
+
 	//bullet
 	sf::Texture myBulletTex;
 	myBulletTex.loadFromFile("bullet.png");
@@ -200,6 +208,7 @@ int main() {
 		myRock2.setPosition(700, -100);
 		myRock3.setPosition(600, -100);
 		myRock4.setPosition(400, -100);
+		myRock5.setPosition(800, -100);
 		myHeart.setPosition(400, -100);
 	//Boom
 	sf::Texture myBoomTex;
@@ -214,10 +223,6 @@ int main() {
 
 	myBoom.setTextureRect(sf::IntRect(0, 0, spritesizeBoomX, spritesizeBoomY));
 	myBoom.setPosition(-1000, -2000);
-	
-	
-	
-	
 	//WHILE LOOPPPPP_________________________________________________________
 	while (true) {
 		myWindow.draw(myBg);
@@ -262,12 +267,8 @@ int main() {
 
 		int ranBombX = 500;
 		
-		int ranBombY = -4000;
-		
-		
-		
-		//random rock
-		
+		int ranBombY = -4000;	
+		//random rock	
 			if (ranX < 2) {
 				ranRockX = 800;
 			}
@@ -331,8 +332,7 @@ int main() {
 			else if (ranX7 < 8 && ranX2 >= 5) {
 				ranRockX7 = 300;
 			}
-			//ran heart
-			
+			//ran heart		
 			if (heartX< 2) {
 				ranHeartX = 700;
 			}
@@ -352,9 +352,6 @@ int main() {
 			else if (bombX < 8 && ranX2 >= 5) {
 				ranBombX = 900;
 			}
-			
-			
-			
 			//level run_____________________________________________________________________________
 			if (level == 1) {
 				myRock.move(0.0f, 0.5f);
@@ -376,10 +373,7 @@ int main() {
 			myBomb1.move(0.0f,0.3f);
 			if (myBomb1.getPosition().y >= 700) {
 				myBomb1.setPosition(ranBombX, ranBombY);
-			}
-			
-			
-			
+			}		
 			//level 2
 			if (level == 2) {
 				myRock.move(0.0f, 0.5f);
@@ -416,11 +410,33 @@ int main() {
 					myRock4.setPosition(ranRockX4, ranRockY);
 				}
 			}
-			
-			
-			
-			
-			// background move
+			//level 4
+			if (level == 4) {
+				myRock.move(0.0f, 0.5f);
+
+				if (myRock.getPosition().y >= 700) {
+					myRock.setPosition(ranRockX, ranRockY);
+				}
+				myRock2.move(0.0f, 0.6f);
+				if (myRock2.getPosition().y >= 700) {
+					myRock2.setPosition(ranRockX2, ranRockY);
+				}
+				myRock3.move(0.0f, 0.4f);
+				if (myRock3.getPosition().y >= 700) {
+					myRock3.setPosition(ranRockX3, ranRockY);
+				}
+				myRock4.move(0.0f, 0.35f);
+				if (myRock4.getPosition().y >= 700) {
+					myRock4.setPosition(ranRockX4, ranRockY);	
+				}
+				myRock5.move(0.0f, 0.6f);
+				if (myRock5.getPosition().y >= 700) {
+					myRock5.setPosition(ranRockX5, ranRockY);
+				}
+			}
+
+
+		// background move
 			myBg.move(0.0f, 0.1f);
 		if (myBg.getPosition().y >= -100) {
 			myBg.setPosition(myBg.getPosition().x, -1200);
@@ -442,7 +458,6 @@ int main() {
 				animationFrame = 0;
 			}
 		}
-
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
 			myShip.move(-0.8f, 0.0f);
 			myShip.setTextureRect(sf::IntRect(spritesizeX * animationFrame, spritesizeY * 0, spritesizeX, spritesizeY));
@@ -450,7 +465,6 @@ int main() {
 				animationFrame = 0;
 			}
 		}
-
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
 			myShip.move(0.0f, 0.8f);
 			myShip.setTextureRect(sf::IntRect(spritesizeX * animationFrame, spritesizeY * 0, spritesizeX, spritesizeY));
@@ -474,20 +488,18 @@ int main() {
 			Ybullet = -3.0f;
 		}
 		myBullet.move(Xbullet, Ybullet);
-
 		//bomb shoot
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::B)) {
 			if (Bomb > 0) {
 				if (myBomb.getPosition().y <= 0) {
 					myBomb.setPosition(myShip.getPosition().x + 18, myShip.getPosition().y);
-				
-				}
 				Bomb--;
+				}
+				
 			}
 			
 		}
 		myBomb.move(0.0f, -1.0f);
-
 		//bound ship
 		if (myShip.getPosition().x <= 0) {
 			myShip.setPosition(0, myShip.getPosition().y);
@@ -503,7 +515,7 @@ int main() {
 		}
 		//bound Bullet myrock
 		if (myBullet.getGlobalBounds().intersects(myRock.getGlobalBounds())) {
-			myBullet.setPosition(-1000, -1000);
+			myBullet.setPosition(-1000, -1000);			
 			score++;
 		}
 		if (myBullet.getGlobalBounds().intersects(myRock2.getGlobalBounds())) {
@@ -517,32 +529,42 @@ int main() {
 		if (myBullet.getGlobalBounds().intersects(myRock4.getGlobalBounds())) {
 			myBullet.setPosition(-1000, -1000);
 			score++;
+		}		
+		if (myBullet.getGlobalBounds().intersects(myRock5.getGlobalBounds())) {
+			myBullet.setPosition(-1000, -1000);
+			score++;
 		}
 		
 		//bound Bomb myrock
 		if (myBomb.getGlobalBounds().intersects(myRock.getGlobalBounds())) {
 			myBomb.setPosition(-1000, -1000);
+			myRock.setPosition(ranRockX, ranRockY);
 			score += 100;
 		}
 		if (myBomb.getGlobalBounds().intersects(myRock2.getGlobalBounds())) {
 			myBomb.setPosition(-1000, -1000);
+			myRock4.setPosition(ranRockX4, ranRockY);
 			score += 100;
 		}
 		if (myBomb.getGlobalBounds().intersects(myRock3.getGlobalBounds())) {
 			myBomb.setPosition(-1000, -1000);
+			myRock3.setPosition(ranRockX3, ranRockY);
 			score+= 100;
 		}
 		if (myBomb.getGlobalBounds().intersects(myRock4.getGlobalBounds())) {
 			myBomb.setPosition(-1000, -1000);
+			myRock4.setPosition(ranRockX4, ranRockY);
+			score += 100;
+		}	
+		if (myBomb.getGlobalBounds().intersects(myRock5.getGlobalBounds())) {
+			myBomb.setPosition(-1000, -1000);
+			myRock5.setPosition(ranRockX5, ranRockY);
 			score += 100;
 		}
-		
-		
-		
-		//bound ship heart
+			//bound ship heart
 		if (myShip.getGlobalBounds().intersects(myHeart.getGlobalBounds())) {
 			myHeart.setPosition(ranHeartX, ranHeartY);
-			if (heart <=4) { 
+			if (heart <=9) { 
 				heart++;
 			}
 			else {
@@ -558,10 +580,7 @@ int main() {
 			else {
 				Bomb = Bomb;
 			}
-		}
-		
-		
-		
+		}	
 		//bound ship rock
 		if (myShip.getGlobalBounds().intersects(myRock.getGlobalBounds())) {
 			myRock.setPosition(ranRockX, ranRockY);
@@ -599,7 +618,15 @@ int main() {
 				heart = heart;
 			}
 		}
-		
+		if (myShip.getGlobalBounds().intersects(myRock5.getGlobalBounds())) {
+			myRock5.setPosition(ranRockX5, ranRockY);
+			if (heart > 0) {
+				heart--;
+			}
+			else {
+				heart = heart;
+			}
+		}
 		//boom
 		if (score >= 40) {
 			myBoom.setPosition(myRock.getPosition().x, myRock.getPosition().y);
@@ -665,7 +692,7 @@ int main() {
 		myWindow.draw(myRock2);
 		myWindow.draw(myRock3);
 		myWindow.draw(myRock4);
-		
+		myWindow.draw(myRock5);
 		myWindow.draw(myHeart);
 		myWindow.draw(myBomb1);
 		myWindow.draw(myBoom);
