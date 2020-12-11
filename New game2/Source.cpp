@@ -58,7 +58,15 @@ int main() {
 	backgroundSound.setBuffer(myBuffer);
 	backgroundSound.play();
 	backgroundSound.setLoop(true);
-
+	backgroundSound.setVolume(2);
+	//////sound hit
+	sf::SoundBuffer myBuffer1;
+	myBuffer1.loadFromFile("hitsound.wav");
+	sf::Sound hitsound;
+	hitsound.setBuffer(myBuffer1);
+	
+	
+	
 	//Background
 	sf::Texture myBackground;
 	myBackground.loadFromFile("galaxy.png");
@@ -525,6 +533,7 @@ int main() {
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::M)) {
 			if (myBullet.getPosition().y <= 0) {
 				myBullet.setPosition(myShip.getPosition().x + 18, myShip.getPosition().y);
+				hitsound.play();
 			}
 			Xbullet = 0.0f;
 			Ybullet = -3.0f;
@@ -563,7 +572,7 @@ int main() {
 			if (hit == 4) {
 					myBoom.setPosition(myRock.getPosition().x, myRock.getPosition().y);
 				}
-			if (hit == 5) {
+			if (hit >= 5) {
 				myRock.setPosition(ranRockX, ranRockY);
 				
 				if (hit >= 5) {
@@ -578,7 +587,7 @@ int main() {
 			if (hit == 4) {
 					myBoom.setPosition(myRock2.getPosition().x, myRock2.getPosition().y);
 				}
-			if (hit == 5) {
+			if (hit >= 5) {
 				myRock2.setPosition(ranRockX2, ranRockY);
 				
 				if (hit >= 5) {
@@ -593,7 +602,7 @@ int main() {
 			if (hit == 4) {
 					myBoom.setPosition(myRock3.getPosition().x, myRock3.getPosition().y);
 				}
-			if (hit == 5) {
+			if (hit >= 5) {
 				myRock3.setPosition(ranRockX3, ranRockY);
 				
 				if (hit >= 5) {
@@ -608,7 +617,7 @@ int main() {
 			if (hit == 4) {
 					myBoom.setPosition(myRock4.getPosition().x, myRock4.getPosition().y);
 				}
-			if (hit == 5) {
+			if (hit >= 5) {
 				myRock4.setPosition(ranRockX4, ranRockY);
 				
 				if (hit >= 5) {
@@ -623,7 +632,7 @@ int main() {
 			if (hit == 4) {
 						myBoom.setPosition(myRock5.getPosition().x, myRock5.getPosition().y);
 					}
-			if (hit == 5) {
+			if (hit >= 5) {  
 				
 					myRock5.setPosition(ranRockX5, ranRockY);
 				
@@ -640,7 +649,7 @@ int main() {
 			if (hit == 19) {
 				myBoom.setPosition(myRock6.getPosition().x, myRock6.getPosition().y);
 			}
-			if (hit == 20) {
+			if (hit >= 20) {
 
 				myRock6.setPosition(ranRockX6, -500);
 
@@ -768,24 +777,22 @@ int main() {
 			}
 		}
 		//score
-		if (score == 200) {
+		if (score >= 200 && score <500) {
 			level = 2;
 		}
-		if (score == 500) {
+		if (score >= 500 && score < 900) {
 			level = 3;
 		}
-		if (score == 900) {
+		if (score >= 900 && score < 1500) {
 			level = 4;
 		}
-		if (score == 1500) {
+		if (score >= 1500 && score < 3000) {
 			level = 5;
 		}
-		if (score == 3000) {
+		if (score >= 3000) {
 			level = 6;
 		}
-		if (score > 3000) {
-			level = 6;
-		}
+		
 		
 		
 		myText.setPosition(0, 0);
