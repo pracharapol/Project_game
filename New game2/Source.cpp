@@ -12,10 +12,17 @@
 
 int main() {
 	
+	
+	
+	
+	
+	
+	
+	int m = 1;
 	int score = 0;
 	int level = 1;
 	int heart = 5;
-	int Bomb = 0;
+	int Bomb = 1;
 	int hit = 0;
 	int hit2 = 0;
 	sf::RenderWindow myWindow(sf::VideoMode(1024, 720), "My Game");
@@ -62,7 +69,7 @@ int main() {
 	backgroundSound.setBuffer(myBuffer);
 	backgroundSound.play();
 	backgroundSound.setLoop(true);
-	backgroundSound.setVolume(20);
+	backgroundSound.setVolume(10);
 	//////sound hit
 	sf::SoundBuffer myBuffer1;
 	myBuffer1.loadFromFile("hitsound.wav");
@@ -258,28 +265,46 @@ int main() {
 
 	myBoom.setTextureRect(sf::IntRect(0, 0, spritesizeBoomX, spritesizeBoomY));
 	myBoom.setPosition(-1000, -2000);
+	//enemy
+	sf::Texture myEnemyTex;
+	myEnemyTex.loadFromFile("enemy.png");
+
+	sf::Sprite myEnemy;
+	myEnemy.setTexture(myEnemyTex);
+	myEnemy.setScale(0.2, 0.2);  
+
+	int spritesizeEnemyX = myEnemyTex.getSize().x / 1;
+	int spritesizeEnemyY = myEnemyTex.getSize().y / 1;
+
+	myEnemy.setTextureRect(sf::IntRect(0, 0, spritesizeEnemyX, spritesizeEnemyY));
+	myEnemy.setPosition(800, -900);
+	
+	
+	
+	
 	//WHILE LOOPPPPP_________________________________________________________
 	while (true) {
 		myWindow.draw(myBg);
+
 		srand(time(NULL));
 		int ranX = rand() % 10;
 
 		int ranY = rand() % 10;
 
 		int ranRockX = 600, ranRockY = -100;//YYYY
-		
+
 		int ranX2 = rand() % 10;
 
 		int ranRockX2 = 500;
-			
+
 		int ranX3 = rand() % 10;
 
 		int ranRockX3 = 400;
-		
+
 		int ranX4 = rand() % 10;
 
 		int ranRockX4 = 300;
-		
+
 		int ranX5 = rand() % 10;
 
 		int ranRockX5 = 200;
@@ -288,219 +313,275 @@ int main() {
 
 		int ranRockX6 = 100;
 
-		int ranX7 = rand() % 10;
+		int ranX7 = rand() % 25;
 
-		int ranRockX7 = 700;
+		float ranRockX7 = 0.08f;
 
 		int heartX = rand() % 10;
 
 		int ranHeartY = -5000;
 
 		int ranHeartX = 500;
-		
+
 		int bombX = rand() % 10;
 
 		int ranBombX = 500;
-		
-		int ranBombY = -4000;	
+
+		int ranBombY = -4000;
 		//random rock	
-			if (ranX < 2) {
-				ranRockX = 800;
-			}
-			else if (ranX < 5 && ranX >= 2) {
-				ranRockX = 100;
-			}
-			else if (ranX < 8 && ranX >= 5) {
-				ranRockX = 500;
-			}
-			if (ranX2 < 2) {
-				ranRockX2 = 600;
-			}
-			else if (ranX2 < 5 && ranX2 >= 2) {
-				ranRockX2 = 300;
-			}
-			else if (ranX2 < 8 && ranX2 >= 5) {
-				ranRockX2 = 900;
-			}
-			if (ranX3 < 2) {
-				ranRockX3 = 200;
-			}
-			else if (ranX3 < 5 && ranX2 >= 2) {
-				ranRockX3 = 400;
-			}
-			else if (ranX3 < 8 && ranX2 >= 5) {
-				ranRockX3 = 600;
-			}
-			if (ranX4 < 2) {
-				ranRockX4 = 250;
-			}
-			else if (ranX4 < 5 && ranX2 >= 2) {
-				ranRockX4 = 350;
-			}
-			else if (ranX4 < 8 && ranX2 >= 5) {
-				ranRockX4 = 850;
-			}
-			if (ranX5 < 2) {
-				ranRockX5 = 180;
-			}
-			else if (ranX5 < 5 && ranX2 >= 2) {
-				ranRockX5 = 360;
-			}
-			else if (ranX5 < 8 && ranX2 >= 5) {
-				ranRockX5 = 540;
-			}
-			if (ranX6 < 2) {
-				ranRockX6 = 50;
-			}
-			else if (ranX6 < 5 && ranX2 >= 2) {
-				ranRockX6 = 480;
-			}
-			else if (ranX6 < 8 && ranX2 >= 5) {
-				ranRockX6 = 860;
-			}
-			if (ranX7 < 2) {
-				ranRockX7 = 100;
-			}
-			else if (ranX7 < 5 && ranX2 >= 2) {
-				ranRockX7 = 200;
-			}
-			else if (ranX7 < 8 && ranX2 >= 5) {
-				ranRockX7 = 300;
-			}
-			//ran heart		
-			if (heartX< 2) {
-				ranHeartX = 700;
-			}
-			else if (heartX < 5 && ranX2 >= 2) {
-				ranHeartX = 800;
-			}
-			else if (heartX < 8 && ranX2 >= 5) {
-				ranHeartX = 900;
-			}
-			//ran bomb
-			if (bombX < 2) {
-				ranBombX = 700;
-			}
-			else if (bombX < 5 && ranX2 >= 2) {
-				ranBombX = 800;
-			}
-			else if (bombX < 8 && ranX2 >= 5) {
-				ranBombX = 900;
-			}
-			//level run_____________________________________________________________________________
-			if (level == 1) {
-				myRock.move(0.0f, 0.5f);
+		if (ranX < 2) {
+			ranRockX = 800;
+		}
+		else if (ranX < 5 && ranX >= 2) {
+			ranRockX = 100;
+		}
+		else if (ranX < 8 && ranX >= 5) {
+			ranRockX = 500;
+		}
+		if (ranX2 < 2) {
+			ranRockX2 = 600;
+		}
+		else if (ranX2 < 5 && ranX2 >= 2) {
+			ranRockX2 = 300;
+		}
+		else if (ranX2 < 8 && ranX2 >= 5) {
+			ranRockX2 = 900;
+		}
+		if (ranX3 < 2) {
+			ranRockX3 = 200;
+		}
+		else if (ranX3 < 5 && ranX2 >= 2) {
+			ranRockX3 = 400;
+		}
+		else if (ranX3 < 8 && ranX2 >= 5) {
+			ranRockX3 = 600;
+		}
+		if (ranX4 < 2) {
+			ranRockX4 = 250;
+		}
+		else if (ranX4 < 5 && ranX2 >= 2) {
+			ranRockX4 = 350;
+		}
+		else if (ranX4 < 8 && ranX2 >= 5) {
+			ranRockX4 = 850;
+		}
+		if (ranX5 < 2) {
+			ranRockX5 = 180;
+		}
+		else if (ranX5 < 5 && ranX2 >= 2) {
+			ranRockX5 = 360;
+		}
+		else if (ranX5 < 8 && ranX2 >= 5) {
+			ranRockX5 = 540;
+		}
+		if (ranX6 < 2) {
+			ranRockX6 = 50;
+		}
+		else if (ranX6 < 5 && ranX2 >= 2) {
+			ranRockX6 = 480;
+		}
+		else if (ranX6 < 8 && ranX2 >= 5) {
+			ranRockX6 = 860;
+		}
+		if (ranX7 < 2) {
+			ranRockX7 = 0.1f;
+		}
+		else if (ranX7 < 5 && ranX2 >= 2) {
+			ranRockX7 = -0.3f;
+		}
+		else if (ranX7 < 8 && ranX2 >= 5) {
+			ranRockX7 = 0.1f;
+		}
+		else if (ranX7 < 11 && ranX2 >= 8) {
+			ranRockX7 = -0.1f;
+		}
+		else if (ranX7 < 14 && ranX2 >= 11) {
+			ranRockX7 = 0.07f;
+		}
+		else if (ranX7 < 17 && ranX2 >= 14) {
+			ranRockX7 = -0.07f;
+		}
+		else if (ranX7 < 20 && ranX2 >= 17) {
+			ranRockX7 = 0.08f;
+		}
+		else if (ranX7 < 23 && ranX2 >= 20) {
+			ranRockX7 = -0.08f;
+		}
+		//ran heart		
+		if (heartX < 2) {
+			ranHeartX = 700;
+		}
+		else if (heartX < 5 && ranX2 >= 2) {
+			ranHeartX = 800;
+		}
+		else if (heartX < 8 && ranX2 >= 5) {
+			ranHeartX = 900;
+		}
+		//ran bomb
+		if (bombX < 2) {
+			ranBombX = 700;
+		}
+		else if (bombX < 5 && ranX2 >= 2) {
+			ranBombX = 800;
+		}
+		else if (bombX < 8 && ranX2 >= 5) {
+			ranBombX = 900;
+		}
+		//level run_____________________________________________________________________________
+		if (level == 1) {
+			myRock.move(0.0f, 0.5f);
 
-				if (myRock.getPosition().y >= 700) {
-					myRock.setPosition(ranRockX, ranRockY);
-				}
-				myRock2.move(0.0f, 0.6f);
-				if (myRock2.getPosition().y >= 700) {
-					myRock2.setPosition(ranRockX2, ranRockY);
-				}
-			}			
-			//heart
-			myHeart.move(0.0f,0.3f);
-			if (myHeart.getPosition().y >= 700) {
-				myHeart.setPosition(ranHeartX, ranHeartY);
+			if (myRock.getPosition().y >= 700) {
+				myRock.setPosition(ranRockX, ranRockY);
 			}
-			//bomb
-			myBomb1.move(0.0f,0.3f);
-			if (myBomb1.getPosition().y >= 700) {
-				myBomb1.setPosition(ranBombX, ranBombY);
-			}		
-			//level 2
-			if (level == 2) {
-				myRock.move(0.0f, 0.5f);
+			myRock2.move(0.0f, 0.6f);
+			if (myRock2.getPosition().y >= 700) {
+				myRock2.setPosition(ranRockX2, ranRockY);
 
-				if (myRock.getPosition().y >= 700) {
-					myRock.setPosition(ranRockX, ranRockY);
-				}
-				myRock2.move(0.0f, 0.6f);
-				if (myRock2.getPosition().y >= 700) {
-					myRock2.setPosition(ranRockX2, ranRockY);
-				}
-				myRock3.move(0.0f, 0.4f);
-				if (myRock3.getPosition().y >= 700) {
-					myRock3.setPosition(ranRockX3, ranRockY);
-				}
-				
 			}
-			//level 3
-			if (level == 3) {
-				myRock.move(0.0f, 0.5f);
+			
+		}
+		//heart
+		myHeart.move(0.0f, 0.3f);
+		if (myHeart.getPosition().y >= 700) {
+			myHeart.setPosition(ranHeartX, ranHeartY);
+		}
+		//bomb
+		myBomb1.move(0.0f, 0.3f);
+		if (myBomb1.getPosition().y >= 700) {
+			myBomb1.setPosition(ranBombX, ranBombY);
+		}
+		//level 2
+		if (level == 2) {
+			myRock.move(0.0f, 0.5f);
 
-				if (myRock.getPosition().y >= 700) {
-					myRock.setPosition(ranRockX, ranRockY);
-				}
-				myRock2.move(0.0f, 0.6f);
-				if (myRock2.getPosition().y >= 700) {
-					myRock2.setPosition(ranRockX2, ranRockY);
-				}
-				myRock3.move(0.0f, 0.4f);
-				if (myRock3.getPosition().y >= 700) {
-					myRock3.setPosition(ranRockX3, ranRockY);
-				}
-				myRock4.move(0.0f, 0.35f);
-				if (myRock4.getPosition().y >= 700) {
-					myRock4.setPosition(ranRockX4, ranRockY);
-				}
+			if (myRock.getPosition().y >= 700) {
+				myRock.setPosition(ranRockX, ranRockY);
 			}
-			//level 4
-			if (level == 4) {
-				myRock.move(0.0f, 0.5f);
+			myRock2.move(0.0f, 0.6f);
+			if (myRock2.getPosition().y >= 700) {
+				myRock2.setPosition(ranRockX2, ranRockY);
+			}
+			myRock3.move(0.0f, 0.4f);
+			if (myRock3.getPosition().y >= 700) {
+				myRock3.setPosition(ranRockX3, ranRockY);
+			}
 
-				if (myRock.getPosition().y >= 700) {
-					myRock.setPosition(ranRockX, ranRockY);
-				}
-				myRock2.move(0.0f, 0.6f);
-				if (myRock2.getPosition().y >= 700) {
-					myRock2.setPosition(ranRockX2, ranRockY);
-				}
-				myRock3.move(0.0f, 0.4f);
-				if (myRock3.getPosition().y >= 700) {
-					myRock3.setPosition(ranRockX3, ranRockY);
-				}
-				myRock4.move(0.0f, 0.35f);
-				if (myRock4.getPosition().y >= 700) {
-					myRock4.setPosition(ranRockX4, ranRockY);	
-				}
-				myRock5.move(0.0f, 0.6f);
-				if (myRock5.getPosition().y >= 700) {
-					myRock5.setPosition(ranRockX5, ranRockY);
-				}
-			}
-			//level 5
-			if (level == 5) {
-				myRock.move(0.0f, 0.5f);
+		}
+		//level 3
+		if (level == 3) {
+			myRock.move(0.0f, 0.5f);
 
-				if (myRock.getPosition().y >= 700) {
-					myRock.setPosition(ranRockX, ranRockY);
-				}
-				myRock2.move(0.0f, 0.6f);
-				if (myRock2.getPosition().y >= 700) {
-					myRock2.setPosition(ranRockX2, ranRockY);
-				}
-				myRock3.move(0.0f, 0.4f);
-				if (myRock3.getPosition().y >= 700) {
-					myRock3.setPosition(ranRockX3, ranRockY);
-				}
-				myRock4.move(0.0f, 0.35f);
-				if (myRock4.getPosition().y >= 700) {
-					myRock4.setPosition(ranRockX4, ranRockY);
-				}
-				myRock5.move(0.0f, 0.6f);
-				if (myRock5.getPosition().y >= 700) {
-					myRock5.setPosition(ranRockX5, ranRockY);
-				}
-				myRock6.move(0.0f, 0.2f);
-				if (myRock6.getPosition().y >= 700) {
-					myRock6.setPosition(ranRockX6, -500);
+			if (myRock.getPosition().y >= 700) {
+				myRock.setPosition(ranRockX, ranRockY);
+			}
+			myRock2.move(0.0f, 0.6f);
+			if (myRock2.getPosition().y >= 700) {
+				myRock2.setPosition(ranRockX2, ranRockY);
+			}
+			myRock3.move(0.0f, 0.4f);
+			if (myRock3.getPosition().y >= 700) {
+				myRock3.setPosition(ranRockX3, ranRockY);
+			}
+			myRock4.move(0.0f, 0.35f);
+			if (myRock4.getPosition().y >= 700) {
+				myRock4.setPosition(ranRockX4, ranRockY);
+			}
+		}
+		//level 4
+		if (level == 4) {
+			myRock.move(0.0f, 0.5f);
+
+			if (myRock.getPosition().y >= 700) {
+				myRock.setPosition(ranRockX, ranRockY);
+			}
+			myRock2.move(0.0f, 0.6f);
+			if (myRock2.getPosition().y >= 700) {
+				myRock2.setPosition(ranRockX2, ranRockY);
+			}
+			myRock3.move(0.0f, 0.4f);
+			if (myRock3.getPosition().y >= 700) {
+				myRock3.setPosition(ranRockX3, ranRockY);
+			}
+			myRock4.move(0.0f, 0.35f);
+			if (myRock4.getPosition().y >= 700) {
+				myRock4.setPosition(ranRockX4, ranRockY);
+			}
+			myRock5.move(0.0f, 0.6f);
+			if (myRock5.getPosition().y >= 700) {
+				myRock5.setPosition(ranRockX5, ranRockY);
+			}
+		}
+		//level 5
+		if (level == 5) {
+			myRock.move(0.0f, 0.5f);
+
+			if (myRock.getPosition().y >= 700) {
+				myRock.setPosition(ranRockX, ranRockY);
+			}
+			myRock2.move(0.0f, 0.6f);
+			if (myRock2.getPosition().y >= 700) {
+				myRock2.setPosition(ranRockX2, ranRockY);
+			}
+			myRock3.move(0.0f, 0.4f);
+			if (myRock3.getPosition().y >= 700) {
+				myRock3.setPosition(ranRockX3, ranRockY);
+			}
+			myRock4.move(0.0f, 0.35f);
+			if (myRock4.getPosition().y >= 700) {
+				myRock4.setPosition(ranRockX4, ranRockY);
+			}
+			myRock5.move(0.0f, 0.6f);
+			if (myRock5.getPosition().y >= 700) {
+				myRock5.setPosition(ranRockX5, ranRockY);
+			}
+			myRock6.move(0.0f, 0.2f);
+			if (myRock6.getPosition().y >= 700) {
+				myRock6.setPosition(ranRockX6, -500);
+			}
+		}
+
+		//level 6
+		if (level == 6) {
+			myRock.move(0.0f, 0.5f);
+
+			if (myRock.getPosition().y >= 700) {
+				myRock.setPosition(ranRockX, ranRockY);
+			}
+			myRock2.move(0.0f, 0.6f);
+			if (myRock2.getPosition().y >= 700) {
+				myRock2.setPosition(ranRockX2, ranRockY);
+			}
+			myRock3.move(0.0f, 0.4f);
+			if (myRock3.getPosition().y >= 700) {
+				myRock3.setPosition(ranRockX3, ranRockY);
+			}
+			myRock4.move(0.0f, 0.35f);
+			if (myRock4.getPosition().y >= 700) {
+				myRock4.setPosition(ranRockX4, ranRockY);
+			}
+			myRock5.move(0.0f, 0.6f);
+			if (myRock5.getPosition().y >= 700) {
+				myRock5.setPosition(ranRockX5, ranRockY);
+			}
+			myRock6.move(0.0f, 0.2f);
+			if (myRock6.getPosition().y >= 700) {
+				myRock6.setPosition(ranRockX6, -500);
+			}
+			//Enemy
+			myEnemy.move(ranRockX7, 0.0f);
+			if (true) {
+				if (m == 1) {
+					myEnemy.setPosition(0, 0);
+					m++;
+
 				}
 			}
+		}
+
 
 		// background move
-			myBg.move(0.0f, 0.1f);
+		myBg.move(0.0f, 0.1f);
 		if (myBg.getPosition().y >= -100) {
 			myBg.setPosition(myBg.getPosition().x, -1200);
 		}
@@ -557,11 +638,11 @@ int main() {
 			if (Bomb > 0) {
 				if (myBomb.getPosition().y <= 0) {
 					myBomb.setPosition(myShip.getPosition().x + 18, myShip.getPosition().y);
-				Bomb--;
+					Bomb--;
 				}
-				
+
 			}
-			
+
 		}
 		myBomb.move(0.0f, -1.0f);
 		//bound ship
@@ -579,16 +660,16 @@ int main() {
 		}
 		//bound Bullet myrock
 		if (myBullet.getGlobalBounds().intersects(myRock.getGlobalBounds())) {
-			myBullet.setPosition(-1000, -1000);			
+			myBullet.setPosition(-1000, -1000);
 			score++;
 			hit++;
 			if (hit == 4) {
-					myBoom.setPosition(myRock.getPosition().x, myRock.getPosition().y);
-					boomsound.play();
+				myBoom.setPosition(myRock.getPosition().x, myRock.getPosition().y);
+				boomsound.play();
 			}
 			if (hit >= 5) {
 				myRock.setPosition(ranRockX, ranRockY);
-				
+
 				if (hit >= 5) {
 					hit = 0;
 				}
@@ -599,12 +680,12 @@ int main() {
 			score++;
 			hit++;
 			if (hit == 4) {
-					myBoom.setPosition(myRock2.getPosition().x, myRock2.getPosition().y); 
-					boomsound.play();
-				}
+				myBoom.setPosition(myRock2.getPosition().x, myRock2.getPosition().y);
+				boomsound.play();
+			}
 			if (hit >= 5) {
 				myRock2.setPosition(ranRockX2, ranRockY);
-				
+
 				if (hit >= 5) {
 					hit = 0;
 				}
@@ -615,12 +696,12 @@ int main() {
 			score++;
 			hit++;
 			if (hit == 4) {
-					myBoom.setPosition(myRock3.getPosition().x, myRock3.getPosition().y);
-					boomsound.play();
+				myBoom.setPosition(myRock3.getPosition().x, myRock3.getPosition().y);
+				boomsound.play();
 			}
 			if (hit >= 5) {
 				myRock3.setPosition(ranRockX3, ranRockY);
-				
+
 				if (hit >= 5) {
 					hit = 0;
 				}
@@ -631,34 +712,34 @@ int main() {
 			score++;
 			hit++;
 			if (hit == 4) {
-					myBoom.setPosition(myRock4.getPosition().x, myRock4.getPosition().y);
-					boomsound.play();
+				myBoom.setPosition(myRock4.getPosition().x, myRock4.getPosition().y);
+				boomsound.play();
 			}
 			if (hit >= 5) {
 				myRock4.setPosition(ranRockX4, ranRockY);
-				
+
 				if (hit >= 5) {
 					hit = 0;
 				}
 			}
-		}		
+		}
 		if (myBullet.getGlobalBounds().intersects(myRock5.getGlobalBounds())) {
 			myBullet.setPosition(-1000, -1000);
-			score++;	
+			score++;
 			hit++;
 			if (hit == 4) {
-						myBoom.setPosition(myRock5.getPosition().x, myRock5.getPosition().y);
-						boomsound.play();
+				myBoom.setPosition(myRock5.getPosition().x, myRock5.getPosition().y);
+				boomsound.play();
 			}
-			if (hit >= 5) {  
-				
-					myRock5.setPosition(ranRockX5, ranRockY);
-				
+			if (hit >= 5) {
+
+				myRock5.setPosition(ranRockX5, ranRockY);
+
 				if (hit >= 5) {
 					hit = 0;
 				}
 			}
-		
+
 		}
 		if (myBullet.getGlobalBounds().intersects(myRock6.getGlobalBounds())) {
 			myBullet.setPosition(-1000, -1000);
@@ -678,7 +759,7 @@ int main() {
 			}
 
 		}
-		
+
 		if (hit == 0) {
 			myBoom.setPosition(-1000, -2000);
 		}
@@ -702,14 +783,14 @@ int main() {
 			myBomb.setPosition(-1000, -1000);
 			myRock3.setPosition(ranRockX3, ranRockY);
 			boomsound.play();
-			score+= 100;
+			score += 100;
 		}
 		if (myBomb.getGlobalBounds().intersects(myRock4.getGlobalBounds())) {
 			myBomb.setPosition(-1000, -1000);
 			myRock4.setPosition(ranRockX4, ranRockY);
 			boomsound.play();
 			score += 100;
-		}	
+		}
 		if (myBomb.getGlobalBounds().intersects(myRock5.getGlobalBounds())) {
 			myBomb.setPosition(-1000, -1000);
 			myRock5.setPosition(ranRockX5, ranRockY);
@@ -722,11 +803,11 @@ int main() {
 			boomsound.play();
 			score += 100;
 		}
-			//bound ship heart
+		//bound ship heart
 		if (myShip.getGlobalBounds().intersects(myHeart.getGlobalBounds())) {
 			myHeart.setPosition(ranHeartX, ranHeartY);
 			spellsound.play();
-			if (heart <=9) { 
+			if (heart <= 9) {
 				heart++;
 			}
 			else {
@@ -743,7 +824,7 @@ int main() {
 			else {
 				Bomb = Bomb;
 			}
-		}	
+		}
 		//bound ship rock
 		if (myShip.getGlobalBounds().intersects(myRock.getGlobalBounds())) {
 			myRock.setPosition(ranRockX, ranRockY);
@@ -753,7 +834,7 @@ int main() {
 			}
 			else {
 				heart = heart;
-			}		
+			}
 		}
 		if (myShip.getGlobalBounds().intersects(myRock2.getGlobalBounds())) {
 			myRock2.setPosition(ranRockX2, ranRockY);
@@ -805,6 +886,53 @@ int main() {
 				heart = heart;
 			}
 		}
+
+		//bound enemy
+		if (myEnemy.getPosition().x <= 0) {
+			myEnemy.setPosition(0, myEnemy.getPosition().y);
+
+		}
+		else if (myEnemy.getPosition().x >= 905) {
+			myEnemy.setPosition(905, myEnemy.getPosition().y);
+
+		}
+
+		//bound Bullet Enemy
+		if (true) {
+
+			if (myBullet.getGlobalBounds().intersects(myEnemy.getGlobalBounds())) {
+				myBullet.setPosition(-1000, -1000);
+				score++;
+				hit++;
+			}
+			if (myBomb.getGlobalBounds().intersects(myEnemy.getGlobalBounds())) {
+					myBomb.setPosition(-1000, -1000);
+					hit += 40;
+					boomsound.play();
+					score += 100;
+				}
+				if (hit == 99) {
+					myBoom.setPosition(myEnemy.getPosition().x, myEnemy.getPosition().y);
+					boomsound.play();
+				}
+
+				if (hit >= 100) {
+					myEnemy.setPosition(ranRockX, -900);
+
+					if (hit >= 100) {
+						hit = 0;
+					}
+			}
+		}
+		
+		
+		
+		
+		if (hit == 0) {
+			myBoom.setPosition(-1000, -2000);
+		}
+		
+		
 		//score
 		if (score >= 200 && score <500) {
 			level = 2;
@@ -856,7 +984,7 @@ int main() {
 		myWindow.draw(myBullet);
 		myWindow.draw(myBomb);
 		myWindow.draw(myShip);
-
+		myWindow.draw(myEnemy);
 		myWindow.draw(myRock);
 		myWindow.draw(myRock2);
 		myWindow.draw(myRock3);
@@ -867,7 +995,7 @@ int main() {
 		myWindow.draw(myBomb1);
 		myWindow.draw(myBoom);
 		//Game over
-		if (heart == 0) {
+		if (heart == 0) { 
 			break;
 			
 		}
