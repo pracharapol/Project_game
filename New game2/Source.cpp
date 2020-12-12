@@ -995,10 +995,7 @@ int main() {
 		myWindow.draw(myBomb1);
 		myWindow.draw(myBoom);
 		//Game over
-		if (heart == 0) { 
-			break;
-			
-		}
+		
 
 		myWindow.display();
 		myWindow.clear();
