@@ -226,6 +226,24 @@ int main() {
 
 	myBullet.setTextureRect(sf::IntRect(0, 0, spritesizeBulletX, spritesizeBulletY));
 	myBullet.setPosition(-1000, -2000);
+	
+	//bullet1
+	sf::Texture myBulletTex1;
+	myBulletTex1.loadFromFile("bullet.png");
+
+	sf::Sprite myBullet1;
+	myBullet1.setTexture(myBulletTex1);
+	myBullet1.setScale(0.1, 0.1);
+
+	int spritesizeBulletX1 = myBulletTex1.getSize().x / 1;
+	int spritesizeBulletY1 = myBulletTex1.getSize().y / 1;
+
+	myBullet1.setTextureRect(sf::IntRect(0, 0, spritesizeBulletX1, spritesizeBulletY1));
+	myBullet1.setPosition(-1000,2000);
+
+	
+	
+	
 	//bomb
 	sf::Texture myBombTex;
 	myBombTex.loadFromFile("bomb.png");
@@ -277,7 +295,7 @@ int main() {
 	int spritesizeEnemyY = myEnemyTex.getSize().y / 1;
 
 	myEnemy.setTextureRect(sf::IntRect(0, 0, spritesizeEnemyX, spritesizeEnemyY));
-	myEnemy.setPosition(800, -900);
+	myEnemy.setPosition(800, 900);
 	
 	
 	
@@ -903,13 +921,13 @@ int main() {
 			if (myBullet.getGlobalBounds().intersects(myEnemy.getGlobalBounds())) {
 				myBullet.setPosition(-1000, -1000);
 				score++;
-				hit++;
+				
 			}
 			if (myBomb.getGlobalBounds().intersects(myEnemy.getGlobalBounds())) {
 					myBomb.setPosition(-1000, -1000);
 					hit += 40;
 					boomsound.play();
-					score += 100;
+					
 				}
 				if (hit == 99) {
 					myBoom.setPosition(myEnemy.getPosition().x, myEnemy.getPosition().y);
@@ -934,21 +952,51 @@ int main() {
 		
 		
 		//score
-		if (score >= 200 && score <500) {
+		if (score >= 100 && score <200) {
 			level = 2;
 		}
-		if (score >= 500 && score < 900) {
+		if (score >= 200 && score < 300) {
 			level = 3;
 		}
-		if (score >= 900 && score < 1500) {
+		if (score >= 300 && score < 500) {
 			level = 4;
 		}
-		if (score >= 1500 && score < 3000) {
+		if (score >= 500 && score < 1000) {
 			level = 5;
 		}
-		if (score >= 3000) {
+		if (score >= 1000) {
 			level = 6;
 		}
+		//Bullet1
+		if (myBullet1.getPosition().y>=700) {
+			if (myEnemy.getPosition().x > 0) {
+				myBullet1.setPosition(myEnemy.getPosition().x+44, myEnemy.getPosition().y);
+				hitsound.play();
+				
+
+			}
+		}
+		myBullet1.move(0.0f,3.0f);
+		
+		if (myShip.getGlobalBounds().intersects(myBullet1.getGlobalBounds())){
+			myBullet1.setPosition(0, 800);
+			boomsound.play();
+			if (heart>0) {
+				heart -= 1;
+			}
+			else {
+				heart = heart;
+			}
+		
+		}
+		
+		
+		
+		
+		
+		
+		
+		
 		myText.setPosition(0, 0);
 		myText.setString("Score : ");
 		myWindow.draw(myText);
@@ -982,6 +1030,7 @@ int main() {
 		myWindow.draw(myText3);
 		
 		myWindow.draw(myBullet);
+		myWindow.draw(myBullet1);
 		myWindow.draw(myBomb);
 		myWindow.draw(myShip);
 		myWindow.draw(myEnemy);
