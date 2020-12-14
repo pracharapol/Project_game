@@ -75,6 +75,15 @@ int main() {
 	myBuffer1.loadFromFile("hitsound.wav");
 	sf::Sound hitsound;
 	hitsound.setBuffer(myBuffer1);
+	//////sound hit1
+	sf::SoundBuffer myBuffer11;
+	myBuffer11.loadFromFile("hitsound.wav");
+	sf::Sound hitsound1;
+	hitsound1.setBuffer(myBuffer11);
+	
+	
+	
+	
 	//////sound boom
 	sf::SoundBuffer myBuffer2;
 	myBuffer2.loadFromFile("soundboom.flac");
@@ -608,7 +617,7 @@ int main() {
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
 			myShip.move(0.0f, -0.8f);
 			myShip.setTextureRect(sf::IntRect(spritesizeX * animationFrame, spritesizeY * 0, spritesizeX, spritesizeY));
-
+			
 			if (animationFrame >= 2) {
 				animationFrame = 0;
 			}
@@ -643,6 +652,7 @@ int main() {
 		animationFrame++;
 		//bullet shoot
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::M)) {
+			
 			if (myBullet.getPosition().y <= 0) {
 				myBullet.setPosition(myShip.getPosition().x + 18, myShip.getPosition().y);
 				hitsound.play();
@@ -654,6 +664,7 @@ int main() {
 		//bomb shoot
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::B)) {
 			if (Bomb > 0) {
+				hitsound.play();
 				if (myBomb.getPosition().y <= 0) {
 					myBomb.setPosition(myShip.getPosition().x + 18, myShip.getPosition().y);
 					Bomb--;
@@ -971,7 +982,7 @@ int main() {
 		if (myBullet1.getPosition().y>=700) {
 			if (myEnemy.getPosition().x > 0) {
 				myBullet1.setPosition(myEnemy.getPosition().x+44, myEnemy.getPosition().y);
-				hitsound.play();
+				hitsound1.play();
 				
 
 			}
