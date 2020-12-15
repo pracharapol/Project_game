@@ -967,19 +967,19 @@ int main() {
 				}
 				if (myBomb.getGlobalBounds().intersects(myEnemy.getGlobalBounds())) {
 					myBomb.setPosition(-1000, -1000);
-					hit += 40;
+					hit += 20;
 					boomsound.play();
 
 				}
-				if (hit == 99) {
+				if (hit == 49) {
 					myBoom.setPosition(myEnemy.getPosition().x, myEnemy.getPosition().y);
 					boomsound.play();
 				}
 
-				if (hit >= 100) {
+				if (hit >= 50) {
 					myEnemy.setPosition(ranRockX, -900);
 
-					if (hit >= 100) {
+					if (hit >= 50) {
 						hit = 0;
 					}
 				}
@@ -1018,7 +1018,7 @@ int main() {
 
 				}
 			}
-			myBullet1.move(0.0f, 3.0f);
+			myBullet1.move(0.0f, 1.5f);
 
 			if (myShip.getGlobalBounds().intersects(myBullet1.getGlobalBounds())) {
 				myBullet1.setPosition(0, 800);
