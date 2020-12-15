@@ -1507,6 +1507,7 @@ void readData() {
 			
 			
 
+
 			myText.setPosition(40, 340);
 			myText.setFillColor(sf::Color::Black);
 			myText.setString("Enter your name :");
