@@ -11,11 +11,12 @@ void readData();
 std::string name = "";                  
 
 int readStatus = 0;
-void Gameover();
+void Start();
  
 
 int main() {
 	readData();
+	Start();
 	int gameover = 0;
 	int g = 0;
 
@@ -1084,7 +1085,14 @@ int main() {
 			myWindow.draw(myHeart);
 			myWindow.draw(myBomb1);
 			myWindow.draw(myBoom);
-			
+			sf::Event event;
+			//event
+			while (myWindow.pollEvent(event)) {
+				if (event.type == sf::Event::Closed) {
+					myWindow.close();
+				}
+
+			}
 
 			myWindow.display();
 
@@ -1102,6 +1110,18 @@ int main() {
 		
 		while (heart <= 0) {
 			backgroundSound.stop();
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+				myWindow.close();
+				
+				backgroundSound.stop();
+			}
+			sf::Event event;
+			while (myWindow.pollEvent(event)) {
+				if (event.type == sf::Event::Closed) {
+					myWindow.close();
+				}
+
+			}
 			myWindow.draw(myBg);
 			myWindow.draw(myGa);
 			myWindow.display();
@@ -1110,10 +1130,48 @@ int main() {
 	
 	}
 
-void Gameover() {
-	sf::RenderWindow  windowG(sf::VideoMode(1024, 712), "Game over");
-	while (true) {
+void Start() {
+	sf::RenderWindow  windowG(sf::VideoMode(1024, 712), "Start");
+	//Background
+	sf::Texture myMenu;
+	myMenu.loadFromFile("menu.png");
 
+	sf::Sprite myM;
+	myM.setTexture(myMenu);
+	myM.setPosition(0, 0);
+	myM.setScale(0.8, 1);
+	
+	sf::RectangleShape rectangle;
+		rectangle.setSize(sf::Vector2f(395, 40));
+		rectangle.setOutlineColor(sf::Color::Red);
+		rectangle.setPosition(350, 170);
+	
+	
+	while (readStatus==1) {
+		
+		sf::Event event;
+		
+		if (rectangle.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(windowG)))) {
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+				readStatus = 2;
+			}
+
+		}
+		
+
+		
+		while (windowG.pollEvent(event)) {
+			if (event.type == sf::Event::Closed) {
+				windowG.close();
+			}
+		
+		}
+		
+		
+		
+		
+		windowG.draw(rectangle);
+		windowG.draw(myM);
 		windowG.display();
 	}
 
@@ -1230,7 +1288,9 @@ void readData() {
 
 
 			while (windowName.pollEvent(event)) {
-
+				if (event.type == sf::Event::Closed) {
+					windowName.close();
+				}
 				if (event.type == sf::Event::TextEntered) {
 
 					if (event.text.unicode < 128) {
