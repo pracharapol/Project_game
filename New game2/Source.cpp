@@ -3,20 +3,33 @@
 #include<stdlib.h>
 #include<SFML/Audio.hpp>
 #include<time.h>
-
+#include<string.h>
+int score = 0;
 
 void readData();       
+void writeData();
+std::string topScore = "";                
 
+std::string topScoreName = "";            
 
-std::string name = "";                  
+std::string myScore = "250";                
+
+std::string myName = "";
+
+               
 
 int readStatus = 0;
 void Start();
- 
+void high();
 
 int main() {
+	
 	readData();
 	Start();
+	high();
+	
+	writeData();
+
 	int gameover = 0;
 	int g = 0;
 
@@ -24,7 +37,7 @@ int main() {
 	
 	
 	int m = 1;
-	int score = 0;
+	
 	int level = 1;
 	int heart = 5;
 	int Bomb = 1;
@@ -339,7 +352,7 @@ int main() {
 	//WHILE LOOPPPPP_________________________________________________________
 	if (g == 0) {
 		
-		while (heart > 0) {
+		while (heart >0) {
 			
 			myWindow.draw(myBg);
 			//Game over
@@ -1146,7 +1159,10 @@ void Start() {
 		rectangle.setOutlineColor(sf::Color::Red);
 		rectangle.setPosition(350, 170);
 	
-	
+		sf::RectangleShape rectangle1;
+		rectangle1.setSize(sf::Vector2f(395, 40));
+		rectangle1.setOutlineColor(sf::Color::Red);
+		rectangle1.setPosition(350, 320);
 	while (readStatus==1) {
 		
 		sf::Event event;
@@ -1157,7 +1173,15 @@ void Start() {
 			}
 
 		}
-		
+		if (rectangle1.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(windowG)))) {
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+				readStatus = 3;
+				
+				
+				
+			}
+
+		}
 
 		
 		while (windowG.pollEvent(event)) {
@@ -1169,10 +1193,178 @@ void Start() {
 		
 		
 		
-		
+		windowG.draw(rectangle1);
 		windowG.draw(rectangle);
 		windowG.draw(myM);
+		
 		windowG.display();
+		
+	}
+
+}
+
+void high() {
+	sf::RenderWindow  windowH(sf::VideoMode(1024, 712), "High score");
+	sf::RectangleShape rectangle;
+	rectangle.setSize(sf::Vector2f(250, 80));
+	rectangle.setOutlineColor(sf::Color::Cyan);
+	rectangle.setPosition(380, 500);
+
+	//Background
+	sf::Texture myBackground;
+	myBackground.loadFromFile("exit.png");
+
+	sf::Sprite myBg;
+	myBg.setTexture(myBackground);
+	myBg.setPosition(380, 500);
+	myBg.setScale(0.2,0.1 );
+	
+	
+	
+	sf::Font myFont1;
+	myFont1.loadFromFile("CENTURY.ttf");
+	sf::Text myText1;
+	myText1.setFillColor(sf::Color::Cyan);
+	myText1.setFont(myFont1);
+
+	sf::Font myFont;
+	myFont.loadFromFile("CENTURY.ttf");
+	sf::Text myText;
+	myText.setFillColor(sf::Color::Cyan);
+	myText.setFont(myFont);
+
+	sf::Font myFont2;
+	myFont2.loadFromFile("CENTURY.ttf");
+	sf::Text myText2;
+	myText2.setFillColor(sf::Color::Cyan);
+	myText2.setFont(myFont);
+	
+	sf::Font myFont3;
+	myFont3.loadFromFile("CENTURY.ttf");
+	sf::Text myText3;
+	myText3.setFillColor(sf::Color::Cyan);
+	myText3.setFont(myFont3);
+	
+		sf::Font myFont4;
+	myFont4.loadFromFile("CENTURY.ttf");
+	sf::Text myText4;
+	myText4.setFillColor(sf::Color::Cyan);
+	myText4.setFont(myFont4);
+
+
+	sf::Font myFont5;
+	myFont5.loadFromFile("CENTURY.ttf");
+	sf::Text myText5;
+	myText5.setFillColor(sf::Color::Cyan);
+	myText5.setFont(myFont5);
+
+	sf::Font myFont6;
+	myFont6.loadFromFile("CENTURY.ttf");
+	sf::Text myText6;
+	myText6.setFillColor(sf::Color::Cyan);
+	myText6.setFont(myFont6);
+
+	sf::Font myFont7;
+	myFont7.loadFromFile("CENTURY.ttf");
+	sf::Text myText7;
+	myText7.setFillColor(sf::Color::Cyan);
+	myText7.setFont(myFont7);
+
+	sf::Font myFont8;
+	myFont8.loadFromFile("CENTURY.ttf");
+	sf::Text myText8;
+	myText8.setFillColor(sf::Color::Cyan);
+	myText8.setFont(myFont8);
+
+	sf::Font myFont9;
+	myFont9.loadFromFile("CENTURY.ttf");
+	sf::Text myText9;
+	myText9.setFillColor(sf::Color::Cyan);
+	myText9.setFont(myFont9);
+
+	sf::Font myFont10;
+	myFont10.loadFromFile("CENTURY.ttf");
+	sf::Text myText10;
+	myText10.setFillColor(sf::Color::Cyan);
+	myText10.setFont(myFont10);
+	while (readStatus == 3) {
+
+		
+		if (rectangle.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(windowH)))) {
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+				readStatus = 0;
+			}
+		}
+		myText1.setPosition(350, 20);
+		myText1.setFillColor(sf::Color::Cyan);
+		myText1.setString("High Score");
+		myText1.setCharacterSize(50);
+		windowH.draw(myText1);
+		
+		myText.setPosition(300, 100);
+		myText.setFillColor(sf::Color::Cyan);
+		myText.setString("teenoy");
+		myText.setCharacterSize(30);
+		windowH.draw(myText);
+		
+		myText2.setPosition(500, 100);
+		myText2.setFillColor(sf::Color::Cyan);
+		myText2.setString(":             3508");
+		myText2.setCharacterSize(30);
+		windowH.draw(myText2);
+		
+		myText3.setPosition(300, 150);
+		myText3.setFillColor(sf::Color::Cyan);
+		myText3.setString("kamu");
+		myText3.setCharacterSize(30);
+		windowH.draw(myText3);
+
+		myText4.setPosition(500, 150);
+		myText4.setFillColor(sf::Color::Cyan);
+		myText4.setString(":             3369");
+		myText4.setCharacterSize(30);
+		windowH.draw(myText4);
+		
+		myText5.setPosition(300, 200);
+		myText5.setFillColor(sf::Color::Cyan);
+		myText5.setString("Ta tatto");
+		myText5.setCharacterSize(30);
+		windowH.draw(myText5);
+
+		myText6.setPosition(500, 200);
+		myText6.setFillColor(sf::Color::Cyan);
+		myText6.setString(":             3201");
+		myText6.setCharacterSize(30);
+		windowH.draw(myText6);
+		
+		myText7.setPosition(300, 250);
+		myText7.setFillColor(sf::Color::Cyan);
+		myText7.setString("smileeeeee");
+		myText7.setCharacterSize(30);
+		windowH.draw(myText7);
+
+		myText8.setPosition(500, 250);
+		myText8.setFillColor(sf::Color::Cyan);
+		myText8.setString(":             3105");
+		myText8.setCharacterSize(30);
+		windowH.draw(myText8);
+		
+		myText9.setPosition(300, 300);
+		myText9.setFillColor(sf::Color::Cyan);
+		myText9.setString("konggggggg");
+		myText9.setCharacterSize(30);
+		windowH.draw(myText9);
+
+		myText10.setPosition(500, 300);
+		myText10.setFillColor(sf::Color::Cyan);
+		myText10.setString(":             3001");
+		myText10.setCharacterSize(30);
+		windowH.draw(myText10);
+		
+		windowH.draw(rectangle);
+		windowH.draw(myBg);
+		
+		windowH.display();
 	}
 
 }
@@ -1184,10 +1376,10 @@ void Start() {
 
 
 
-
-
 void readData() {      
 	
+
+	           
 	
 	
 		sf::RenderWindow windowName(sf::VideoMode(1024, 712), "Name Player");
@@ -1195,14 +1387,17 @@ void readData() {
 
 
 		sf::Font myFont;
-
 		myFont.loadFromFile("CENTURY.ttf");
-
 		sf::Text myText;
-
 		myText.setFillColor(sf::Color::Cyan);
-
 		myText.setFont(myFont);
+
+
+		sf::Font myFont1;
+		myFont1.loadFromFile("CENTURY.ttf");
+		sf::Text myText1;
+		myText1.setFillColor(sf::Color::Cyan);
+		myText1.setFont(myFont1);
 
 		//Background
 		sf::Texture myBackground;
@@ -1295,7 +1490,7 @@ void readData() {
 
 					if (event.text.unicode < 128) {
 
-						name += static_cast<char>(event.text.unicode);
+						myName += static_cast<char>(event.text.unicode);
 
 					}
 
@@ -1304,25 +1499,31 @@ void readData() {
 
 
 			}
-
-
-
-
-
+			myText1.setPosition(350, 20);
+			myText1.setFillColor(sf::Color::Black);
+			myText1.setString("MetheoStorm");
+			myText1.setCharacterSize(50);
+			windowName.draw(myText1);
+			
+			
 
 			myText.setPosition(40, 340);
-
 			myText.setFillColor(sf::Color::Black);
-
 			myText.setString("Enter your name :");
-
 			windowName.draw(myText);
-			myText.setPosition(300, 340);         
-			myText.setString(name);
+
+			myText.setPosition(300, 340);        
+			myText.setString(myName);			
+			windowName.draw(myText);
+			
+
+
+			
+			
 			windowName.draw(myRock);
 			windowName.draw(myRock2);
 			
-			windowName.draw(myText);
+			
 			
 			
 			
@@ -1330,5 +1531,36 @@ void readData() {
 			windowName.display();
 
 		}
+
+	}
+	void writeData() {     
+
+	
+
+		FILE* myFile;                          
+		myFile = fopen("dataGame.txt", "w");    
+
+		char data[255];
+
+		char* c;                                
+
+		c = &*myName.begin();                    
+
+		strcpy(data, c);                        
+
+		fprintf(myFile, "%s\n", data);        
+
+
+		c = &*myScore.begin();
+
+		strcpy(data, c);
+
+		fprintf(myFile, "%s\n", data);      
+
+		fclose(myFile);
+
+
+
+
 
 	}
