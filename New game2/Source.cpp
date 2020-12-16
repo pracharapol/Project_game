@@ -1399,6 +1399,12 @@ void readData() {
 		myText1.setFillColor(sf::Color::Cyan);
 		myText1.setFont(myFont1);
 
+
+		sf::Font myFont2;
+		myFont2.loadFromFile("CENTURY.ttf");
+		sf::Text myText2;
+		myText2.setFillColor(sf::Color::Cyan);
+		myText2.setFont(myFont2);
 		//Background
 		sf::Texture myBackground;
 		myBackground.loadFromFile("bbag.png");
@@ -1505,7 +1511,11 @@ void readData() {
 			myText1.setCharacterSize(50);
 			windowName.draw(myText1);
 			
-			
+			myText2.setPosition(300, 600);
+			myText2.setFillColor(sf::Color::Black);
+			myText2.setString("Pracharapol Jaruvanawat 63010630");
+			myText2.setCharacterSize(30);
+			windowName.draw(myText2);
 
 
 			myText.setPosition(40, 340);
